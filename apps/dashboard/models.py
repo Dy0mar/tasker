@@ -13,11 +13,11 @@ class Task(models.Model):
         (DONE, 'DONE'),
     )
 
-    subject = models.CharField(max_length=255, unique=True)
+    subject = models.CharField(max_length=255)
     status = models.CharField(
         max_length=255, choices=CHOICE_STATUS, default=TODO
     )
-    body = models.TextField
+    body = models.TextField(blank=True, null=True)
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL,
         blank=True, null=True, related_name='author'
