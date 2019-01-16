@@ -127,3 +127,8 @@ STATICFILES_DIRS = (
     os.path.join(STATIC_ROOT, 'static'),
 )
 LOGIN_REDIRECT_URL = '/accounts/login/'
+
+try:
+    from .settings_local import *  # noqa
+except ImportError:
+    pass

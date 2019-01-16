@@ -4,13 +4,13 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
-    TODO = 'TODO'
-    IN_PROGRESS = 'IN_PROGRESS'
-    DONE = 'DONE'
+    TODO = 1
+    IN_PROGRESS = 2
+    DONE = 3
     CHOICE_STATUS = (
-        (TODO, TODO),
-        (IN_PROGRESS, IN_PROGRESS),
-        (DONE, DONE),
+        (TODO, 'TODO'),
+        (IN_PROGRESS, 'IN_PROGRESS'),
+        (DONE, 'DONE'),
     )
 
     subject = models.CharField(max_length=255, unique=True)

@@ -19,5 +19,5 @@ from dashboard import views
 
 urlpatterns = [
     # dashboard
-    url(r'', views.dashboard, name='home'),
+    url(r'', views.TaskListView.as_view(), name='home'),
 ]
