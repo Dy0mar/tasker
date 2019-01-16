@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.dashboard',
-    'apps.accounts',
+    'dashboard',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -126,4 +126,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'public')
 STATICFILES_DIRS = (
     os.path.join(STATIC_ROOT, 'static'),
 )
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/accounts/login/'
