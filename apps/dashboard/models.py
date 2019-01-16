@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
-    TODO = 1
-    IN_PROGRESS = 2
-    DONE = 3
+    TODO = 'TODO'
+    IN_PROGRESS = 'IN_PROGRESS'
+    DONE = 'DONE'
     CHOICE_STATUS = (
         (TODO, 'TODO'),
         (IN_PROGRESS, 'IN_PROGRESS'),
