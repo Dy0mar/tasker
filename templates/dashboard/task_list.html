@@ -54,9 +54,10 @@
 				<tbody>
 					{% for task in object_list %}
 						<tr>
-							<td>{% if task.status == 1 %}{{ task }}{% endif %}</td>
-							<td>{% if task.status == 2 %}{{ task }}{% endif %}</td>
-							<td>{% if task.status == 3 %}{{ task }}{% endif %}</td>
+							<td>{% if task.status == 'TODO' %}
+								<a href="update-task">{{ task.subject }}</a>{% endif %}</td>
+							<td>{% if task.status == 'IN_PROGRESS' %}{{ task.subject }}{% endif %}</td>
+							<td>{% if task.status == 'DONE' %}{{ task.subject }}{% endif %}</td>
 						</tr>
 					{% endfor %}
 				</tbody>
