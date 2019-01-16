@@ -13,11 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.urls import path
 
 from dashboard import views
 
 urlpatterns = [
     # dashboard
-    url(r'', views.TaskListView.as_view(), name='home'),
+    path(r'create-task/', views.CreateTaskView.as_view(), name='create-task'),
+    path(r'', views.TaskListView.as_view(), name='home'),
 ]
