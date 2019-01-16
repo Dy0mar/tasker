@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+	{% block body %}
+		<div class="container">
+			<div class="card card-login mx-auto mt-5">
+				<div class="card-header">Login</div>
+				<div class="card-body">
+					<form method="POST" action=".">
+						{% csrf_token %}
+							{% if form.errors %}
+								{% for field in form %}
+									{% for error in field.errors %}
+										<div class="alert alert-danger">
+											<strong>{{ error|escape }}</strong>
+										</div>
+									{% endfor %}
+								{% endfor %}
+								{% for error in form.non_field_errors %}
+									<div class="alert alert-danger">
+										<strong>{{ error|escape }}</strong>
+									</div>
+								{% endfor %}
+							{% endif %}
+
+						<div class="form-group">
+							<div class="form-label-group">
+								{{ form.username }}
+								<label for="id_username">Email address</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="form-label-group">
+								{{ form.password }}
+								<label for="id_password">Password</label>
+							</div>
+						</div>
+						<a class="btn btn-primary btn-block" href="{% url 'login' %}">Login</a>
+					</form>
+					<div class="text-center">
+						<a class="d-block small mt-3" href="{% url 'register' %}">Register an Account</a>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Bootstrap core JavaScript-->
+		{% block scripts %}
+
+			<script src="{% static 'vendor/jquery/jquery.min.js'%}"></script>
+			<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+
+			<!-- Core plugin JavaScript-->
+			<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js'%}"></script>
+
+			<script>
+				$(function () {
+					document.body.className = 'bg-dark';
+				})
+			</script>
+		{% endblock scripts %}
+
+	{% endblock body %}
+

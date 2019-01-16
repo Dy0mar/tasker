@@ -1,0 +1,6 @@
+/log/*log
+/.idea/*
+/env/*
+/tasker/settings_local.py
+db.sqlite3
+*.pyc
