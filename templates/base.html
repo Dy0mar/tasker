@@ -115,7 +115,7 @@
 					<!-- Breadcrumbs-->
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item">
-							<a href="#">Dashboard</a>
+							<a href="{% url 'home' %}">Dashboard</a>
 						</li>
 						<li class="breadcrumb-item active">Overview</li>
 					</ol>
@@ -727,7 +727,7 @@
 					<div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
 					<div class="modal-footer">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-						<a class="btn btn-primary" href="{% url 'login' %}">Logout</a>
+						<a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
 					</div>
 				</div>
 			</div>
