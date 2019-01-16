@@ -17,7 +17,7 @@ class Task(models.Model):
     status = models.CharField(
         max_length=255, choices=CHOICE_STATUS, default=TODO
     )
-    body = models.TextField(blank=True, null=True)
+    body_text = models.TextField(blank=True, null=True)
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL,
         blank=True, null=True, related_name='author'
