@@ -1,4 +1,4 @@
-{% load static %}
+{% load static dashboard_tags %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -119,7 +119,7 @@
 						<li class="breadcrumb-item">
 							<a href="{% url 'home' %}">Dashboard</a>
 						</li>
-						<li class="breadcrumb-item active">{{ request.resolver_match.url_name }}</li>
+						<li class="breadcrumb-item active">{{ request.resolver_match.url_name|replacer }}</li>
 					</ol>
 					{% block container %}{% endblock container %}
 
