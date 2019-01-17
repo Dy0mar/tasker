@@ -34,6 +34,9 @@ class Task(models.Model):
     def __str__(self):
         return self.subject
 
+    class Meta:
+        ordering = ['-created_at']
+
 
 class TaskLog(models.Model):
     CREATE_TASK = 'CREATE_TASK'
