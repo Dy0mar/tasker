@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
+from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import CreateView
+from django.views.generic import DeleteView
 from django.views.generic import ListView
+from django.views.generic import UpdateView
 
-from dashboard.forms import CreateTaskForm
-from dashboard.models import Task, TaskLog
+from dashboard.forms import TaskForm
+from dashboard.models import Task
 
 
 class TaskListView(LoginRequiredMixin, ListView):
@@ -33,22 +36,34 @@ class TaskListView(LoginRequiredMixin, ListView):
 
 
 class CreateTaskView(LoginRequiredMixin, CreateView):
-    template_name = 'dashboard/task_create.html'
     model = Task
-    form_class = CreateTaskForm
+    form_class = TaskForm
+    success_url = reverse_lazy('home')
 
     def form_valid(self, form):
-        task = form.save(commit=False)
-        task.author = self.request.user
-        task.save()
-        TaskLog.objects.create(
-            action=TaskLog.CREATE_TASK,
-            task=task,
-            data=None,
-            user=self.request.user,
-        )
-        return redirect('home')
+        user = self.request.user
+        form.save(author=user, user=user)
+        return redirect(self.success_url)
 
     def get_context_data(self, *args, **kwargs):
         context = super(CreateTaskView, self).get_context_data(**kwargs)
         return context
+
+
+class UpdateTaskView(LoginRequiredMixin, UpdateView):
+    model = Task
+    form_class = TaskForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.save(user=user)
+        return self.render_to_response(self.get_context_data(form=form))
+
+
+class DeleteTaskView(LoginRequiredMixin, DeleteView):
+    model = Task
+    success_url = reverse_lazy('home')
+
+    def get(self, request, *args, **kwargs):
+        return self.post(request, *args, **kwargs)

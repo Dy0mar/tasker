@@ -1,4 +1,12 @@
 {% extends 'base.html' %}
+
+{% if object %}
+	{% block popup %}
+		{% url 'delete-task' pk=object.pk as delete_object_url %}
+		{% include 'inc/popup.html' with target_modal_id='deleteModal' question='Delete this task?' link_text='Delete' url=delete_object_url %}
+	{% endblock popup %}
+{% endif %}
+
 {% block container %}
 
 	<form action="." method="post">
@@ -19,7 +27,17 @@
 		{% endif %}
 
 		{{ form }}
-		<button class="btn btn-primary btn-block" type="submit">Save</button>
+
+		<div class="row">
+			<div class="col-md-4">
+				<button class="btn btn-primary btn-block" type="submit">Save</button>
+			</div>
+			{% if object %}
+				<div class="col-md-4 offset-4">
+					<a class="btn btn-danger btn-block pull-right" href="#" data-toggle="modal" data-target="#deleteModal">Delete</a>
+				</div>
+			{% endif %}
+		</div>
 	</form>
 
 {% endblock container %}
