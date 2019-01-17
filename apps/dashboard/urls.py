@@ -30,5 +30,10 @@ urlpatterns = [
         views.DeleteTaskView.as_view(),
         name='delete-task'
     ),
+    re_path(
+        r'log-task/(?P<pk>\d+)/$',
+        views.TaskLogTemplateDetail.as_view(),
+        name='log-task'
+    ),
     path(r'', views.TaskListView.as_view(), name='home'),
 ]

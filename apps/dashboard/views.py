@@ -3,13 +3,16 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import CreateView
-from django.views.generic import DeleteView
-from django.views.generic import ListView
-from django.views.generic import UpdateView
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
 
 from dashboard.forms import TaskForm
-from dashboard.models import Task
+from dashboard.models import Task, TaskLog
 
 
 class TaskListView(LoginRequiredMixin, ListView):
@@ -67,3 +70,10 @@ class DeleteTaskView(LoginRequiredMixin, DeleteView):
 
     def get(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+
+
+class TaskLogTemplateDetail(LoginRequiredMixin, ListView):
+    model = TaskLog
+
+    def get_queryset(self):
+        return self.model.objects.filter(task=self.kwargs['pk'])

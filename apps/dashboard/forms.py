@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django import forms
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 
 from dashboard.models import Task, TaskLog
@@ -29,13 +30,22 @@ class TaskForm(forms.ModelForm):
                 raise ValidationError('Author already exists')
 
         else:  # Update task
+            data = {}
             origin = self.Meta.model.objects.get(pk=self.instance.pk)
+            check_username = lambda x: x.username if isinstance(x, User) else x
+
             for field in self.cleaned_data:
                 old_value = getattr(origin, field, None)
                 new_value = self.cleaned_data.get(field)
 
                 if old_value != new_value:
-                    data[field] = [old_value, new_value]
+                    if field == 'assigned_to':
+                        data[field] = [
+                            check_username(old_value),
+                            check_username(new_value)
+                        ]
+                    else:
+                        data[field] = [old_value, new_value]
 
         if commit:
             task.save()

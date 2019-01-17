@@ -28,13 +28,16 @@
 
 		{{ form }}
 
-		<div class="row">
+		<div class="row mt-5 mb-5">
 			<div class="col-md-4">
 				<button class="btn btn-primary btn-block" type="submit">Save</button>
 			</div>
 			{% if object %}
-				<div class="col-md-4 offset-4">
-					<a class="btn btn-danger btn-block pull-right" href="#" data-toggle="modal" data-target="#deleteModal">Delete</a>
+				<div class="col-md-4">
+					<a class="btn btn-info btn-block" href="{% url 'log-task' pk=object.pk %}">Log</a>
+				</div>
+				<div class="col-md-4">
+					<a class="btn btn-danger btn-block" href="#" data-toggle="modal" data-target="#deleteModal">Delete</a>
 				</div>
 			{% endif %}
 		</div>
